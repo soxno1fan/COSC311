@@ -6,12 +6,12 @@
  * 		insert(), find(), delete(), toString()
  * 
  * @author Mordechai Sadowsky
- * @version 28-jan-2014
+ * @version 31-jan-2014
  *
  */
 public class Index {
 
-	private IndexRecord[] records; //each row consists of [Record][Record Number]
+	private IndexRecord[] records;
 	private int size;
 	private int numberOfElements;
 	
@@ -29,6 +29,13 @@ public class Index {
 		return (numberOfElements == size);
 	}
 	
+	/**
+	 * Adds a new record to the Index
+	 * 
+	 * @param key is the new value
+	 * @param num is the new record number
+	 * @return (record successfully inserted == true)
+	 */
 	public boolean insert(String key, int num) {
 		IndexRecord newRecord = new IndexRecord(key, num);
 		if (isFull())
@@ -54,8 +61,24 @@ public class Index {
 		return true;
 	}
 	
-	public int find (String value) {
-		return 0;
+	/**
+	 * Searches for a record in IndexRecord array records
+	 * 
+	 * @param goal is an IndexRecord that is being looked for in Index
+	 * @return array index of goal in records, -1 if not found
+	 */
+	public int find (IndexRecord goal) {
+		int low = 0, middle = 0, high = numberOfElements-1;
+		while (low <= high) {
+			middle = (high-low)/2;
+			if (goal.compareTo(records[middle]) > 0)
+				low = middle+1;
+			else if (goal.compareTo(records[middle]) < 0)
+				high = middle-1;
+			else
+				return middle;
+		}
+		return -1;
 	}
 	
 	public String toString() {

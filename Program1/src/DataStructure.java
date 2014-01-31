@@ -38,10 +38,16 @@ public class DataStructure {
 		firstNames = new Index(lines);
 		lastNames =  new Index(lines);
 		ids =  new Index(lines);
+		databasePointer = 0;
 		
+		//Read in database from external file
 		for (int i = 0; i < database.length; i++) {
-			database[i] = new DatabaseRecord(inputStream.next(), inputStream.next(), inputStream.next());
-			
+			String first = inputStream.next(), last = inputStream.next(), id = inputStream.next();
+			database[i] = new DatabaseRecord(first, last, id);
+			firstNames.insert(first, databasePointer);
+			lastNames.insert(last, databasePointer);
+			ids.insert(id, databasePointer);
+			databasePointer++;
 		}
 	}
 	

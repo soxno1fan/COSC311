@@ -65,29 +65,25 @@ public class COSC311Driver {
 		} while (response != 0);
 	}
 
-	// OK Folks. I won't write all of these, but I'll give you an idea
-
 	// Case 1: Add a new student. We need a unique ID number
-
 	public static void addIt() {
-		String name1,name2,tempID;
+		String name1, name2, tempID;
 		boolean found;
 
 		do {
 			System.out.println("Enter a unique ID number to add");
 			tempID = keyboard.nextLine();
 
-			//is it unique ?
+			//is it unique?
 			found = myStructure.search(tempID);
 			if (found)
 			{
-				System.out.println("ID already in use");
+				System.out.print("ID already in use: ");
 				System.out.println("Please re-enter a unique ID");
 			}
 		} while (found);
 
 		// We found a unique ID. Now ask for first and last name
-
 		System.out.println("Enter first name");
 		name1 = keyboard.nextLine();
 		System.out.println("Enter last name");
@@ -100,7 +96,6 @@ public class COSC311Driver {
 
 	// Case 2: delete a student. A student ID must be prompted for. If the ID number does not exist in the database,
 	//    print out a message indicating a such, otherwise delete the entire record
-
 	public static void deleteIt() {
 		// you must provide the code!!
 	}
