@@ -11,13 +11,13 @@
  */
 public class Index {
 
-	private String[][] records; //each row consists of [Record][Record Number]
+	private IndexRecord[] records; //each row consists of [Record][Record Number]
 	private int size;
 	private int numberOfElements;
 	
 	public Index(int sz) {
 		size = sz;
-		records = new String[size][2];
+		records = new IndexRecord[size];
 		numberOfElements = 0;
 	}
 	
@@ -29,26 +29,23 @@ public class Index {
 		return (numberOfElements == size);
 	}
 	
-	public boolean insert(String newValue, String newRecordNumber) {
+	public boolean insert(String key, int num) {
+		IndexRecord newRecord = new IndexRecord(key, num);
 		if (isFull())
 			return false;
 		if (isEmpty()) {
-			records[0][0] = newValue;
-			records[0][1] = newRecordNumber;
+			records[0] = newRecord;
 			numberOfElements++;
 			return true;
 		}
 		int i;
 		for(i = numberOfElements-1; i >= 0; i--) {
-			if (newValue.compareTo(records[i][0]) < 0) {
-				records[i+1][0] = records[i][0];
-				records[i+1][1] = records[i][1];
-			}
+			if (newRecord.compareTo(records[i]) < 0)
+				records[i+1] = records[i];
 			else
 				break;
 		}
-		records[i+1][0] = newValue;
-		records[i+1][1] = newRecordNumber;
+		records[i+1] = newRecord;
 		numberOfElements++;
 		return true;
 	}
@@ -63,9 +60,8 @@ public class Index {
 	
 	public String toString() {
 		String s = new String();
-		for (int i = 0; i < records.length; i++)
-			s += i + ": Column 0: " + records[i][0] + ", Column 1: " + records[i][1] + "\n";
-		//s += "\n";
+		for (int i = 0; i < numberOfElements; i++)
+			s += i + ": " + records[i].toString()+"\n";
 		return s;
 	}
 }

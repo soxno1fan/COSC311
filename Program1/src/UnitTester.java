@@ -18,9 +18,9 @@ public class UnitTester {
 		generator = new Random();
 		keyboard = new Scanner(System.in);
 		
-		/*indexTester();*/
+		indexTester();
 		
-		dataStructureTester();
+		/*dataStructureTester();*/
 		
 		keyboard.close();
 	}
@@ -28,7 +28,7 @@ public class UnitTester {
 	public static void indexTester() {
 		Index ar = new Index(SIZE);
 		for (int i = 0; i < SIZE-3; i++) {
-			if (!(ar.insert(""+generator.nextInt(100),""+i))) {
+			if (!(ar.insert(""+(generator.nextInt(90)+10),i))) {
 				System.out.println("Error");
 				System.exit(0);
 			}
@@ -36,13 +36,13 @@ public class UnitTester {
 		System.out.print(ar);
 
 		keyboard.nextLine();
-		ar.insert("05", "11");
+		ar.insert("05", 11);
 		System.out.print(ar);
 		keyboard.nextLine();
-		ar.insert("10", "12");
+		ar.insert("10", 12);
 		System.out.print(ar);
 		keyboard.nextLine();
-		ar.insert("3", "13");
+		ar.insert("33", 13);
 		System.out.print(ar);
 	}
 	
