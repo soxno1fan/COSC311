@@ -63,6 +63,8 @@ public class COSC311Driver {
 				default:        
 			}
 		} while (response != 0);
+		
+		System.out.println("Thank you, goodbye!");
 	}
 
 	// Case 1: Add a new student. We need a unique ID number

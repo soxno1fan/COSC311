@@ -8,7 +8,7 @@ public class IndexRecord {
 		recordNumber = rN;
 	}
 	
-	public int compareTo(IndexRecord otherRecord) {
+	public int compareToByKey(IndexRecord otherRecord) {
 		return (this.key.compareTo(otherRecord.key));
 	}
 

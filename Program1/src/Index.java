@@ -47,7 +47,7 @@ public class Index {
 		}
 		int i;
 		for(i = numberOfElements-1; i >= 0; i--) {
-			if (newRecord.compareTo(records[i]) < 0)
+			if (newRecord.compareToByKey(records[i]) < 0)
 				records[i+1] = records[i];
 			else
 				break;
@@ -67,16 +67,25 @@ public class Index {
 	 * @param goal is an IndexRecord that is being looked for in Index
 	 * @return array index of goal in records, -1 if not found
 	 */
-	public int find (IndexRecord goal) {
+	public int findByKey(IndexRecord goal) {
 		int low = 0, middle = 0, high = numberOfElements-1;
 		while (low <= high) {
 			middle = (high-low)/2;
-			if (goal.compareTo(records[middle]) > 0)
+			if (goal.compareToByKey(records[middle]) > 0)
 				low = middle+1;
-			else if (goal.compareTo(records[middle]) < 0)
+			else if (goal.compareToByKey(records[middle]) < 0)
 				high = middle-1;
 			else
 				return middle;
+		}
+		return -1;
+	}
+	
+	public int findByKey(String key) {
+		int low = 0, middle = 0, high = numberOfElements-1;
+		while (low <= high) {
+			middle = (high - low)/2;
+			if (true);
 		}
 		return -1;
 	}

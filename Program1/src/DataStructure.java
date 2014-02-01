@@ -15,22 +15,29 @@ public class DataStructure {
 	private DatabaseRecord[] database;
 	private Index firstNames, lastNames, ids;
 	private int databasePointer;
+	private final String PATH = "C:\\Users\\212394821\\git\\COSC311\\Program1\\src\\data.txt";
+	/*private final String PATH = "/Users/Mordechai/git/COSC311/Program1/src/data.txt";*/
 	
 	public DataStructure() {
 		Scanner inputStream = null;
+		int lines = 0;
 		try {
-			inputStream = new Scanner(new FileInputStream("/Users/Mordechai/git/COSC311/Program1/src/data.txt"));
+			inputStream = new Scanner(new FileInputStream(PATH));
+		
+			//Compute length of data file
+			while (inputStream.hasNext()) {
+				inputStream.nextLine();
+				lines++;
+			}
+			System.out.println(lines);
+			
+			inputStream.close();
+			inputStream = new Scanner(new FileInputStream(PATH));
 		}
 		catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
-			System.exit(0);
-		}
-		
-		//Compute length of data file
-		int lines = 0;
-		while (inputStream.hasNext()) {
-			inputStream.nextLine();
-			lines++;
+			System.out.println("Don't forget to update path name for the system!");
+			System.exit(1);
 		}
 		
 		//initialize data members
@@ -52,6 +59,7 @@ public class DataStructure {
 	}
 	
 	public boolean search(String id) {
+		
 		return true;
 	}
 	

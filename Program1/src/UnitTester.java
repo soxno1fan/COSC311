@@ -5,7 +5,7 @@ import java.util.Scanner;
  * This file defines unit tests for different pieces of the COSC 311 Project 1.
  * 
  * @author Mordechai
- * @version 28-jan-2014
+ * @version 01-feb-2014
  *
  */
 public class UnitTester {
@@ -18,9 +18,9 @@ public class UnitTester {
 		generator = new Random();
 		keyboard = new Scanner(System.in);
 		
-		indexTester();
-		
-		/*dataStructureTester();*/
+		/*indexTester();*/
+		dataStructureTester();
+		/*dbStackTester();*/
 		
 		keyboard.close();
 	}
@@ -48,5 +48,18 @@ public class UnitTester {
 	
 	public static void dataStructureTester() {
 		DataStructure test = new DataStructure();
+	}
+	
+	public static void dbStackTester() {
+		DBStack myStack = new DBStack(15);
+		System.out.println("Brand new stack is empty?: "+myStack.isEmpty());
+		System.out.println("Or is it full?: "+myStack.isFull());
+		
+		while (!myStack.isFull()) {
+			myStack.push(generator.nextInt(90)+10);
+		}
+		while (!myStack.isEmpty()) {
+			System.out.println(myStack.pop()+" ");
+		}
 	}
 }
