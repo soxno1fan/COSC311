@@ -1,39 +1,37 @@
-
+/**
+ * COSC311 - Program 1
+ * 
+ * This file describes a stack data type used to store the location of deleted
+ * 	student records so those spaces can be filled by new student additions.
+ * 
+ * @author Mordechai Sadowsky
+ * @version 02-feb-2014
+ *
+ */
 public class DBStack {
 
 	private int[] stack;
-	private int top, bottom, size;
+	private int pointer, size;
 	
 	public DBStack(int x) {
-		top = 0;
-		bottom = 1;
+		pointer = 0;
 		size = x;
 		stack = new int[size];
 	}
 	
 	public boolean isFull() {
-		return (top == bottom);
+		return (pointer == size);
 	}
 	
 	public boolean isEmpty() {
-		return (bottom-top == 1);
+		return (pointer == 0);
 	}
 	
-	public boolean push(int x) {
-		if (isFull())
-			return false;
-		stack[bottom++] = x;
-		if (bottom == size)
-			bottom = 0;
-		return true;
+	public void push(int x) {
+		stack[pointer++] = x;
 	}
 	
 	public int pop() {
-		if (isEmpty())
-			return -1;
-		int temp = stack[top++];
-		if (top == size)
-			top = 0;
-		return temp;
+		return stack[--pointer];
 	}
 }

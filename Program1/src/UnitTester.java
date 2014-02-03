@@ -5,7 +5,7 @@ import java.util.Scanner;
  * This file defines unit tests for different pieces of the COSC 311 Project 1.
  * 
  * @author Mordechai
- * @version 01-feb-2014
+ * @version 02-feb-2014
  *
  */
 public class UnitTester {
@@ -18,8 +18,8 @@ public class UnitTester {
 		generator = new Random();
 		keyboard = new Scanner(System.in);
 		
-		/*indexTester();*/
-		dataStructureTester();
+		indexTester();
+		/*dataStructureTester();*/
 		/*dbStackTester();*/
 		
 		keyboard.close();
@@ -27,7 +27,7 @@ public class UnitTester {
 	
 	public static void indexTester() {
 		Index ar = new Index(SIZE);
-		for (int i = 0; i < SIZE-3; i++) {
+		for (int i = 0; i < SIZE-1; i++) {
 			if (!(ar.insert(""+(generator.nextInt(90)+10),i))) {
 				System.out.println("Error");
 				System.exit(0);
@@ -38,12 +38,11 @@ public class UnitTester {
 		keyboard.nextLine();
 		ar.insert("05", 11);
 		System.out.print(ar);
+		
+		System.out.println("Hit enter to delete record 5");
 		keyboard.nextLine();
-		ar.insert("10", 12);
-		System.out.print(ar);
-		keyboard.nextLine();
-		ar.insert("33", 13);
-		System.out.print(ar);
+		ar.delete(5);
+		System.out.println(ar);
 	}
 	
 	public static void dataStructureTester() {

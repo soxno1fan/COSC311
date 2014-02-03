@@ -1,12 +1,13 @@
 /**
-  *	COSC 311 - Project 1
-  *	
-  *	This file defines the DatabaseRecord type.
-  *
-  *	@author Mordechai Sadowsky
-  *	@version 28-jan-2014
-  */
-  
+ * COSC 311 - Project 1
+ *	
+ * This file defines the DatabaseRecord type. Each record describes a student,
+ *	with a first name, last name and ID number.
+ *
+ * @author Mordechai Sadowsky
+ * @version 02-feb-2014
+ *
+ */
 public class DatabaseRecord {
 
 	private String firstName;

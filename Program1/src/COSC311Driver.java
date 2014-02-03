@@ -1,19 +1,20 @@
+import java.util.Scanner;
+
 /**
- * This will be the main driver program for many of your programs. Specifically,
- * you will need to define a data structure and related algorithms to use with this program.
- * We will be using the data file I have provided for you: a file of 68 records. Each record is composed
- * of three fields:
- *      String lastName
- *      String firstName
- *      String ID
- * ID may be implemented as an integer, but it is easier to implement as a string. Both lastName and firstName
- * may not be unique, but the ID **is** unique.
+ * COSC311 - Program 1
+ * 
+ * This is the driver for Program 1, a database implementation.
+ * 	This program reads in data from an external file of 68 records.
+ * 	Each record is composed of three fields:
+ *      (String lastName) (String firstName) (String ID)
+ *  
+ * This menu driven command line program offers options to add a
+ *  record to the database, delete a record, search for a record
+ * 	and print out the entire database in different orders.
  * 
  * @author Bill Sverdlik, Mordechai Sadowsky
- * @version Version 1.0
+ * @version Version 1.0, 02-feb-2014
  */
-
-import java.util.Scanner;
 
 public class COSC311Driver {
 
@@ -21,12 +22,13 @@ public class COSC311Driver {
 	private static DataStructure myStructure;
 	
 	public static void main(String[] args) {
-		 
 		keyboard = new Scanner(System.in);
 		myStructure = new DataStructure();
 		int response;
 
+		System.out.println("Welcome to YourStudentRoster");
 		do {
+			System.out.println("\nMain menu:\n");
 			System.out.println(" 1 Add a new student");
 			System.out.println(" 2 Delete a student");
 			System.out.println(" 3 Find a student by ID");
@@ -35,12 +37,13 @@ public class COSC311Driver {
 			System.out.println(" 6 List students by last name increasing");
 			System.out.println(" 7 List students by ID decreasing");
 			System.out.println(" 8 List students by first name decreasing");
-			System.out.println(" 9 List students by last name decreasing");
-			System.out.println(" ");
+			System.out.println(" 9 List students by last name decreasing\n");
 			System.out.println(" 0 End");
+			System.out.print("\nMenu selection: ");
 
 			response = keyboard.nextInt();
-
+			keyboard.nextLine();
+			
 			switch (response) {
 				case 1: addIt();
 					break;
@@ -48,89 +51,100 @@ public class COSC311Driver {
 					break;
 				case 3: findIt();
 					break;
-				case 4: listItIncreasingID();		// or see below for programming trick
+				case 4: myStructure.listIt(1, 1);
 					break;
-				case 5: listItIncreasingfName();	
+				case 5: myStructure.listIt(2, 1);	
 					break;
-				case 6: listItIncreasinglName();
+				case 6: myStructure.listIt(3, 1);
 					break;
-				/*case 7: listItDecreasingID();
+				case 7: myStructure.listIt(1, 2);
 					break;
-				case 8: listItDecreasingfName();
+				case 8: myStructure.listIt(2, 2);
 					break;
-				case 9: listItDecreasinglName();
-					break;*/
+				case 9: myStructure.listIt(3, 2);
+					break;
 				default:        
 			}
 		} while (response != 0);
 		
-		System.out.println("Thank you, goodbye!");
+		System.out.println("\nThank you, goodbye!");
 	}
 
-	// Case 1: Add a new student. We need a unique ID number
+	/**
+	 * Menu option 1: add a new student to the database.
+	 */
 	public static void addIt() {
 		String name1, name2, tempID;
 		boolean found;
-
+		
 		do {
-			System.out.println("Enter a unique ID number to add");
+			System.out.print("Enter a unique ID number to add: ");
 			tempID = keyboard.nextLine();
 
 			//is it unique?
-			found = myStructure.search(tempID);
-			if (found)
-			{
-				System.out.print("ID already in use: ");
-				System.out.println("Please re-enter a unique ID");
+			found = (myStructure.search(tempID) > -1);
+			if (found) {
+				System.out.println("ID already in use.");
+				System.out.print("Please re-enter a unique ID: ");
 			}
 		} while (found);
 
 		// We found a unique ID. Now ask for first and last name
-		System.out.println("Enter first name");
+		System.out.print("Enter first name: ");
 		name1 = keyboard.nextLine();
-		System.out.println("Enter last name");
+		System.out.print("Enter last name: ");
 		name2 = keyboard.nextLine();
-
+		System.out.println();
+		
 		// add to our data structure
-		myStructure.insert(name1,name2,tempID);
+		if (!(myStructure.insert(name1,name2,tempID)))
+			System.out.println("Error, database full!");
 	}
 
-
-	// Case 2: delete a student. A student ID must be prompted for. If the ID number does not exist in the database,
-	//    print out a message indicating a such, otherwise delete the entire record
+	/**
+	 * Menu option 2: delete a student from the database.
+	 */
 	public static void deleteIt() {
-		// you must provide the code!!
+		String tempID;
+		boolean found;
+		
+		do {
+			System.out.println("\nEnter the ID number of student to delete: ");
+			tempID = keyboard.nextLine();
+
+			//is it in the database?
+			found = (myStructure.search(tempID) > -1);
+			if (!found) {
+				System.out.println("ID not found.");
+				System.out.print("Please re-enter an ID to delete: ");
+			}
+		} while (!found);
+		
+		myStructure.delete(tempID);
 	}
 
-	//Case 3: find a student. A student ID must be prompted for. If the ID number is not found, print out a
-	//    message indicating as such. Otherwise print out the entire record
-
+	/**
+	 * Menu option 3: find a student
+	 * 	If found, prints out the record.
+	 */
 	public static void findIt() {
+		String tempID;
+		boolean found;
+		int recordNumber;
+		
+		do {
+			System.out.println("\nEnter an ID number: ");
+			tempID = keyboard.nextLine();
 
-		// you must provide the code!!
-
+			//is it in the database?
+			recordNumber = myStructure.search(tempID);
+			found = (recordNumber > -1);
+			if (!found) {
+				System.out.println("ID not found.");
+				System.out.print("Please re-enter an ID to find: ");
+			}
+		} while (!found);
+		
+		myStructure.print(recordNumber);
 	}
-
-	// Cases 4,5,6,7,8,9
-	// A little programming trickery. All of the listing methods below can call the SAME method in DataStructure.
-	// We'll pass 2 parameters: the first indicates which field, the second indicates which order
-	// fieldNum=1 first name
-	// fieldNum=2 last name
-	// fieldNum=3 ID
-	// orderNum=1 increasing
-	// orderNum=2 decreasing
-
-	public static void listItIncreasingID() {
-		myStructure.listIt(3,1);
-	}
-
-	public static void listItIncreasingfName() {
-		myStructure.listIt(1,1);
-	}
-
-	public static void listItIncreasinglName() {
-		myStructure.listIt(2,1);
-	}
-
-
-}    
+}
