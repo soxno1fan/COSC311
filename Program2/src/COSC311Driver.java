@@ -78,14 +78,13 @@ public class COSC311Driver {
 		boolean found;
 		
 		do {
-			System.out.print("Enter a unique ID number to add: ");
+			System.out.print("Enter a unique student ID number: ");
 			tempID = keyboard.nextLine();
 
 			//is it unique?
 			found = (myStructure.search(tempID) > -1);
 			if (found) {
 				System.out.println("ID already in use.");
-				System.out.print("Please re-enter a unique ID: ");
 			}
 		} while (found);
 
@@ -130,21 +129,20 @@ public class COSC311Driver {
 	public static void findIt() {
 		String tempID;
 		boolean found;
-		int recordNumber;
+		int recNum;
 		
 		do {
-			System.out.println("\nEnter an ID number: ");
+			System.out.print("\nEnter an ID number: ");
 			tempID = keyboard.nextLine();
 
 			//is it in the database?
-			recordNumber = myStructure.search(tempID);
-			found = (recordNumber > -1);
+			recNum = myStructure.search(tempID);
+			found = (recNum != -1);
 			if (!found) {
 				System.out.println("ID not found.");
-				System.out.print("Please re-enter an ID to find: ");
 			}
 		} while (!found);
 		
-		myStructure.print(recordNumber);
+		myStructure.print(recNum);
 	}
 }

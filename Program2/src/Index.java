@@ -101,10 +101,21 @@ public class Index {
 		while (temp !=null && temp.recordNumber != recNum) {
 			temp = temp.next;
 		}
-		if (temp != null) {
+		if ((temp == front) && (front != null)) {
+			front.next.previous=null;
+			front = front.next;
+		}
+		else if ((temp == back) && (back != null)) {
+			back.previous.next = null;
+			back=back.previous;
+		}
+		else if (temp != null) {
 			temp.next.previous = temp.previous;
 			temp.previous.next = temp.next;
 		}
+		
+		if (temp != null)
+			numberOfElements--;
 		return temp;
 	}
 	
@@ -118,7 +129,7 @@ public class Index {
 		IndexRecord temp = front;
 		int recNum = -1;
 		
-		while (temp != null && temp.key.compareTo(key) > 0) {
+		while (temp != null && temp.key.compareTo(key) < 0) {
 			temp = temp.next;
 		}
 		if (temp != null && temp.key.equals(key))
@@ -127,22 +138,33 @@ public class Index {
 		return recNum;
 	}
 	
-//	/**
-//	 * Linear search for a record in array of <code>IndexRecord</code>s because
-//	 * 	indices are sorted by keys and not by <code>recordNumber</code>.
-//	 * 
-//	 * @param num is the <code>recordNumber</code> that is being looked for in
-//	 * 	an <code>IndexRecord</code> within <code>Index</code>
-//	 * @return array index of the found <code>IndexRecord</code> within the
-//	 * 	<code>records</code> array, -1 if not found
-//	 */
-	/*public int find(int num) {
-		for (int i = 0; i < numberOfElements; i++) {
-			if (records[i].getRecordNumber() == num)
-				return i;
+	public int getRecordNumberForward(int position) {
+		int recNum = -1;
+		int count = 0;
+		IndexRecord temp = front;
+		while (temp != null && count < position) {
+			temp = temp.next;
+			count++;
 		}
-		return -1;
-	}*/
+		if (temp != null) {
+			recNum = temp.recordNumber;
+		}
+		return recNum;
+	}
+	
+	public int getRecordNumberBackward(int position) {
+		int recNum = -1;
+		int count = 0;
+		IndexRecord temp = back;
+		while (temp != null && count < position) {
+			temp = temp.previous;
+			count++;
+		}
+		if (temp != null) {
+			recNum = temp.recordNumber;
+		}
+		return recNum;
+	}
 	
 	public String toString() {
 		String s = new String();

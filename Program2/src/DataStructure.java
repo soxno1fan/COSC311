@@ -26,7 +26,8 @@ public class DataStructure {
 	private final int SIZE = 100;
 	private DBStack deletedRecords = new DBStack(SIZE);
 	private final String PATH =
-			"/Users/Mordechai/git/COSC311/Program1/src/data.txt";
+//			"/Users/Mordechai/git/COSC311/Program1/src/data.txt";
+			"/afs/umich.edu/user/p/o/polyphon/Documents/M/workspace/COSC311/Program2/src/data.txt";
 	
 	public DataStructure() {
 		Scanner inputStream = null;
@@ -52,6 +53,8 @@ public class DataStructure {
 			String first = inputStream.next();
 			String last = inputStream.next();
 			String id = inputStream.next();
+			if (ids.find(id) != -1)
+				continue;
 			database[databasePointer] = new DatabaseRecord(first, last, id);
 			firstNames.insert(first, databasePointer);
 			lastNames.insert(last, databasePointer);
@@ -59,7 +62,7 @@ public class DataStructure {
 			databasePointer++;
 		}
 		if (inputStream.hasNextLine()) {
-			System.out.println("File is too big! Increase SIZE.");
+			System.out.println("File is too big! Increase database SIZE.");
 			System.exit(1);
 		}
 	}
@@ -141,28 +144,28 @@ public class DataStructure {
 	 */
 	public void listIt(int a, int b) {
 		if (b == 1) { //ascending prints
-			if (a == 1) {
-				
-			}
-			else if (a == 2) {
-				
-			}
-			else if (a == 3) {
-				
-			}
+			if (a == 1)
+				for (int i = 0; i < ids.length(); i++)
+					print(ids.getRecordNumberForward(i));
+			else if (a == 2)
+				for (int i = 0; i < firstNames.length(); i++)
+					print(firstNames.getRecordNumberForward(i));
+			else if (a == 3)
+				for (int i = 0; i < lastNames.length(); i++)
+					print(lastNames.getRecordNumberForward(i));
 			else
 				return;
 		}
-		else if (b == 2) { //descending prints
-			if (a == 1) {
-				
-			}
-			else if (a == 2) {
-				
-			}
-			else if (a == 3) {
-				
-			}
+		else if (b == 2) {
+			if (a == 1)
+				for (int i = 0; i < ids.length(); i++)
+					print(ids.getRecordNumberBackward(i));
+			else if (a == 2)
+				for (int i = 0; i < firstNames.length(); i++)
+					print(firstNames.getRecordNumberBackward(i));
+			else if (a == 3)
+				for (int i = 0; i < lastNames.length(); i++)
+					print(lastNames.getRecordNumberBackward(i));
 			else
 				return;
 		}
