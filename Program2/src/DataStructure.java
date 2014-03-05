@@ -26,8 +26,7 @@ public class DataStructure {
 	private final int SIZE = 100;
 	private DBStack deletedRecords = new DBStack(SIZE);
 	private final String PATH =
-//			"/Users/Mordechai/git/COSC311/Program1/src/data.txt";
-			"/afs/umich.edu/user/p/o/polyphon/Documents/M/workspace/COSC311/Program2/src/data.txt";
+			"/Users/Mordechai/git/COSC311/Program2/src/data.txt";
 	
 	public DataStructure() {
 		Scanner inputStream = null;
@@ -80,7 +79,7 @@ public class DataStructure {
 	}
 	
 	/**
-	 * Adds a record to the database and each <code>Index</code>
+	 * Adds a record to the database and each <code>Index</code>.
 	 * 	Records are inserted in lexicographical order into the indices,
 	 * 	but are entered into the <code>database</code> at the site of a
 	 * 	previously deleted record or the end of the <code>database</code>.
@@ -156,7 +155,7 @@ public class DataStructure {
 			else
 				return;
 		}
-		else if (b == 2) {
+		else if (b == 2) { //descending prints
 			if (a == 1)
 				for (int i = 0; i < ids.length(); i++)
 					print(ids.getRecordNumberBackward(i));
@@ -169,6 +168,8 @@ public class DataStructure {
 			else
 				return;
 		}
+        else
+            return;
 	}
 	
 	public boolean isFull() {

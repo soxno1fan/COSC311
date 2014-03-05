@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * COSC311 - Program 2
  * 
- * This is the driver for Program 1, a database implementation.
+ * This is the driver for Program 2, a database implementation.
  * 	This program reads in data from an external file of 68 records.
  * 	Each record is composed of three fields:
  *      (String lastName) (String firstName) (String ID)

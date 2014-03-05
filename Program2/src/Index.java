@@ -11,7 +11,6 @@
 public class Index {
 
 	private IndexRecord front, back;
-	private int numberOfElements;
 	
 	/**
 	 * This inner class describes the <code>IndexRecord</code> data type.
@@ -41,15 +40,22 @@ public class Index {
 	public Index() {
 		front = null;
 		back = null;
-		numberOfElements = 0;
 	}
 	
 	public boolean isEmpty() {
-		return (numberOfElements == 0);
+		return (front == null);
 	}
 	
 	public int length() {
-		return numberOfElements;
+		int count =0;
+		IndexRecord temp = front;
+		
+		while (temp != null) {
+			temp = temp.next;
+			count++;
+		}
+		
+		return count;
 	}
 	
 	/**
@@ -70,24 +76,25 @@ public class Index {
 			while (temp != null && newRecord.compareTo(temp) > 0) {
 				temp = temp.next;
 			}
-			if (temp == null) {
+            //3 cases:
+			if (temp == null) { //new record belongs at the back
 				newRecord.previous = back;
 				back.next = newRecord;
 				back = newRecord;
 			}
-			else if (temp == front) {
+			else if (temp == front) { //new record belongs at the front
 				newRecord.next = front;
 				front.previous = newRecord;
 				front = newRecord;
 			}
-			else {
+			else { //new record belongs in the middle
 				newRecord.next = temp;
 				newRecord.previous = temp.previous;
 				temp.previous.next = newRecord;
 				temp.previous = newRecord;
 			}
 		}
-		numberOfElements++;
+
 	}
 	
 	/**
@@ -101,21 +108,20 @@ public class Index {
 		while (temp !=null && temp.recordNumber != recNum) {
 			temp = temp.next;
 		}
-		if ((temp == front) && (front != null)) {
+        //3 cases:
+		if ((temp == front) && (front != null)) { //record to delete is in front
 			front.next.previous=null;
 			front = front.next;
 		}
-		else if ((temp == back) && (back != null)) {
+		else if ((temp == back) && (back != null)) { //record is in back
 			back.previous.next = null;
 			back=back.previous;
 		}
-		else if (temp != null) {
+		else if (temp != null) { //record is in the middle
 			temp.next.previous = temp.previous;
 			temp.previous.next = temp.next;
 		}
-		
-		if (temp != null)
-			numberOfElements--;
+
 		return temp;
 	}
 	
@@ -138,6 +144,13 @@ public class Index {
 		return recNum;
 	}
 	
+	/**
+	 * Traverses the list forward from <code>front</code>.
+	 * 
+	 * @param position Number of steps through list to traverse
+	 * @return the <code>recordNumber</code> of the <code>IndexRecord</code>
+	 * 		at <code>position</code> in the list.
+	 */
 	public int getRecordNumberForward(int position) {
 		int recNum = -1;
 		int count = 0;
@@ -152,6 +165,13 @@ public class Index {
 		return recNum;
 	}
 	
+	/**
+	 * Traverses the list backwards from <code>back</code>.
+	 * 
+	 * @param position Number of steps through list to traverse
+	 * @return the <code>recordNumber</code> of the <code>IndexRecord</code>
+	 * 		at <code>position</code> in the list.
+	 */
 	public int getRecordNumberBackward(int position) {
 		int recNum = -1;
 		int count = 0;

@@ -45,7 +45,6 @@ public class Tester {
 		System.out.println(index);
 	}
 	
-	@SuppressWarnings("unused")
 	public static void dataStructureTester() {
 		DataStructure test = new DataStructure();
 	}
