@@ -115,7 +115,7 @@ public class Index {
 		}
 		else if ((temp == back) && (back != null)) { //record is in back
 			back.previous.next = null;
-			back=back.previous;
+			back = back.previous;
 		}
 		else if (temp != null) { //record is in the middle
 			temp.next.previous = temp.previous;
