@@ -3,19 +3,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
- * COSC311 - Program 2
+ * COSC311 - Program 3 (threaded)
  * 
  * This file defines the <code>DataStructure</code> type with an array of
- * 	<code>DatabaseRecords</code> and three <code>Index</code> objects. An object
- * 	initially reads in a list of records from an external file to populate the
+ * 	<code>DatabaseRecords</code> and three <code>Index</code> objects. Instances
+ * 	initially read in a list of records from an external file to populate the
  * 	database. The structures can then be searched, added to, deleted from,
- * 	displayed, and can print an individual record.
+ * 	displayed, and can print individual records.
  * 
  * Student records are referenced to by their position in the database, which
  * 	is stored in each <code>Index</code> as the <code>recordNumber</code>.	 
  * 
  * @author Mordechai Sadowsky
- * @version 23-feb-2014
+ * @version 25-mar-2014
  *
  */
 public class DataStructure {
@@ -26,7 +26,7 @@ public class DataStructure {
 	private final int SIZE = 100;
 	private DBStack deletedRecords = new DBStack(SIZE);
 	private final String PATH =
-			"/Users/Mordechai/git/COSC311/Program2/src/data.txt";
+			"/Users/Mordechai/git/COSC311/Program3/src/data.txt";
 	
 	public DataStructure() {
 		Scanner inputStream = null;

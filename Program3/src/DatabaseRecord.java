@@ -1,5 +1,5 @@
 /**
- * COSC 311 - Project 2
+ * COSC 311 - Project 3 (threaded)
  *	
  * This file defines the DatabaseRecord type. Each record describes a student,
  *	with a first name, last name and ID number.

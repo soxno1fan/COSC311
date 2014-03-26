@@ -1,5 +1,5 @@
 /**
- * COSC311 - Program 2
+ * COSC311 - Program 3 (threaded)
  * 
  * This file describes a stack data type used to store the location of deleted
  * 	student records so those spaces can be filled by new student additions.
