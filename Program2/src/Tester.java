@@ -47,6 +47,7 @@ public class Tester {
 	
 	public static void dataStructureTester() {
 		DataStructure test = new DataStructure();
+		test.print(0);
 	}
 	
 	public static void dbStackTester() {

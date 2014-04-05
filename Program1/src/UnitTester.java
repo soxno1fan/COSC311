@@ -47,6 +47,7 @@ public class UnitTester {
 	
 	public static void dataStructureTester() {
 		DataStructure test = new DataStructure();
+		test.print(0); //just to shut Eclipse up
 	}
 	
 	public static void dbStackTester() {

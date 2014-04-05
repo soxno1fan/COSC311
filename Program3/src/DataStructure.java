@@ -26,7 +26,8 @@ public class DataStructure {
 	private final int SIZE = 100;
 	private DBStack deletedRecords = new DBStack(SIZE);
 	private final String PATH =
-			"/Users/Mordechai/git/COSC311/Program3/src/data.txt";
+			/*"/Users/Mordechai/git/COSC311/Program3/src/data.txt";*/
+			"/afs/umich.edu/user/p/o/polyphon/Documents/M/workspace/COSC311/Program3/src/data.txt";
 	
 	public DataStructure() {
 		Scanner inputStream = null;
