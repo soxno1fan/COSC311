@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class HeapSort {
-
+public class MergeSort {
+	
 	private static final int SIZE = 10000;
-	private static int[] theHeap = new int[SIZE];
-	private static int next = 0;
+	private static int[] theArray = new int[SIZE];
 	private static final String PATH =
 			"/afs/umich.edu/user/p/o/polyphon/Documents/M/workspace/COSC311/Program4/src/";
 	
@@ -35,17 +34,15 @@ public class HeapSort {
 			System.exit(1);
 		}
 		
-		for (int i = 0; i < SIZE; i++) {
-			theHeap[i] = fileInput.nextInt();
-			next++;
-		}
+		for (int i = 0; i < SIZE; i++)
+			theArray[i] = fileInput.nextInt();
+		
 		long initialTime = System.currentTimeMillis();
-		heapify();
-		heapSort();
+		mergeSort();
 		long finalTime = System.currentTimeMillis();
 		
 		for (int i = 0; i < SIZE; i++)
-			fileOutput.println(theHeap[i]);
+			fileOutput.println(theArray[i]);
 		
 		System.out.print("File successfully sorted and output stored in");
 		System.out.println(PATH+inputName);
@@ -56,46 +53,41 @@ public class HeapSort {
 		fileInput.close();
 		keyboard.close();
 	}
+	
+	public static void mergeSort() {
+		int[] workSpace = new int[SIZE];
+		recMergeSort(workSpace, 0, SIZE-1);
+	}
 
-	public static void heapify() {
-		int i = (next-2)/2;
-		for (int j = i; j >= 0; j--)
-			trickleDown(j);
-		
-	}
-	
-	public static void heapSort() {
-		int limit = next;
-		for (int i =1; i <= limit; i++) {
-			int x = pop();
-			theHeap[next] = x;
+	private static void recMergeSort(int[] workSpace, int lowerBound, int upperBound) {
+		if(lowerBound == upperBound)
+			return;
+		else {
+			int mid = (lowerBound+upperBound) / 2;
+			recMergeSort(workSpace, lowerBound, mid);
+			recMergeSort(workSpace, mid+1, upperBound);
+			merge(workSpace, lowerBound, mid+1, upperBound);
 		}
 	}
-	
-	public static void trickleDown(int index) {
-		int largerChild;
-		int value = theHeap[index];
-		while (index < next/2) {
-			int left = 2*index+1;
-			int right = 2*index+2;
-			if (right < next && theHeap[left] < theHeap[right])
-				largerChild = right;
+
+	private static void merge(int[] workSpace, int lowPtr, int highPtr, int upperBound) {
+		int j = 0;
+		int lowerBound = lowPtr;
+		int mid = highPtr-1;
+		int n = upperBound-lowerBound+1;
+		while(lowPtr <= mid && highPtr <= upperBound) {
+			if(theArray[lowPtr] < theArray[highPtr])
+				workSpace[j++] = theArray[lowPtr++];
 			else
-				largerChild = left;
-			
-			if (value >= theHeap[largerChild])
-				break;
-			
-			theHeap[index] = theHeap[largerChild];
-			index = largerChild;
+				workSpace[j++] = theArray[highPtr++];
 		}
-		theHeap[index] = value;
-	}
-	
-	public static int pop() {
-		int x = theHeap[0];
-		theHeap[0] = theHeap[--next];
-		trickleDown(0);
-		return x;
+		while(lowPtr <= mid) {
+			workSpace[j++] = theArray[lowPtr++];
+		}
+		while(highPtr <= upperBound) {
+			workSpace[j++] = theArray[highPtr++];
+		}
+		for(j=0; j<n; j++)
+			theArray[lowerBound+j] = workSpace[j];
 	}
 }
