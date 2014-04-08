@@ -15,7 +15,7 @@ public class MergeSort {
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		
-		System.out.print("Welcome to HeapSort.\n\nPlease enter an input data file name: ");
+		System.out.print("Welcome to MergeSort.\n\nPlease enter an input data file name: ");
 		String inputName = keyboard.next();
 		System.out.print("\nPlease enter an output data file name: ");
 		String outputName = keyboard.next();
