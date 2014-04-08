@@ -10,7 +10,7 @@ public class MergeSort {
 	private static final int SIZE = 10000;
 	private static int[] theArray = new int[SIZE];
 	private static final String PATH =
-			"/afs/umich.edu/user/p/o/polyphon/Documents/M/workspace/COSC311/Program4/src/";
+			"/Users/Mordechai/git/COSC311/Program4/src/";
 	
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);

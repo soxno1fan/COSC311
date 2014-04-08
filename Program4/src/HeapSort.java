@@ -11,7 +11,7 @@ public class HeapSort {
 	private static int[] theHeap = new int[SIZE];
 	private static int next = 0;
 	private static final String PATH =
-			"/afs/umich.edu/user/p/o/polyphon/Documents/M/workspace/COSC311/Program4/src/";
+			"/Users/Mordechai/git/COSC311/Program4/src/";
 	
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
